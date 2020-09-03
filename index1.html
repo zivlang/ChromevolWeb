@@ -150,11 +150,11 @@ header_small_font {
 
 
 	$('#TreeFile').on('change', function () {
-		fileChosen(this, document.getElementById('TreeFile_txt'));
+		fileChosen(this, document.getElementById('TreeTxt'));
 	});
 	
 	$('#CountsFile').on('change', function () {
-		fileChosen(this, document.getElementById('CountsFile_txt'));
+		fileChosen(this, document.getElementById('CountsTxt'));
 	});
 	
 	
@@ -227,13 +227,17 @@ function eraseInputTextCounts() {
 
   	function validateForm(){	
 	// verify there is input
-	var treeFile				= document.forms["myForm"]["TreeFile"].value;
-	var countsFile					= document.forms["myForm"]["CountsFile"].value;
+	var treeFile = document.forms["myForm"]["TreeFile"].value;
+	var countsFile = document.forms["myForm"]["CountsFile"].value;
+	var treeTxt = document.getElementById("TreeTxt").value;
+	var countsTxt = document.getElementById("CountsTxt").value;
     var items = ["model_BASE_NUM","model_BASE_NUM_DUPL","model_CONST_RATE","model_CONST_RATE_NO_DUPL","model_CONST_RATE_DEMI","model_CONST_RATE_DEMI_EST"];
 	var flag_var = "false";	
-		
 	
-		if ( (treeFile == "") || (countsFile == "")) 
+	console.log(countsTxt)
+	console.log(treeTxt)
+	
+		if ( ((treeFile == "") || (countsFile == "")) && (countsTxt == "") || (treeTxt == "") ) 
 		{
 			alert('Please enter tree and counts data !!');
 			return false;
@@ -284,6 +288,30 @@ function eraseInputTextCounts() {
 	  //$("#footer").load("footer.html"); 
 	});
 
+	function LoadExample(){
+		form = document.myForm
+    	form.reset();
+		form.CountsTxt.value=`>Abutilon_incanum
+7
+>Abutilon_muelleri_fridericii
+8
+>Abutilon_abutiloides
+14
+>Abutilon_regnellii
+8
+>Abutilon_purpusii
+8
+>Abutilon_menziesii
+14
+>Abutilon_megapotamicum
+8
+>Abutilon_geminiflorum
+8
+>Abutilon_malacum
+7
+`;
+		form.TreeTxt.value="((((Abutilon_purpusii:0.0148873,Abutilon_geminiflorum:0.0148873)1:0.0165545,(Abutilon_muelleri_fridericii:0.0247211,Abutilon_regnellii:0.0247211)1:0.00672063)1:0.00821308,Abutilon_megapotamicum:0.0396549)1:0.0423444,((Abutilon_malacum:0.0483517,(Abutilon_incanum:0.0346808,Abutilon_menziesii:0.0346808)1:0.013671)1:0.00597289,Abutilon_abutiloides:0.0543246)1:0.00693332);";
+	}
     </script>
 
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -328,20 +356,20 @@ function eraseInputTextCounts() {
 			<div class = "col-md-12 col-lg-12">
 				<div class="col-md-6 col-lg-6">
 				<font face="serif" size="5" color="#4271bc">Load your Tree file:</font><br>
+				<textarea id="TreeTxt" name="TreeTxt" rows=8 cols=50></textarea>
 				<input type="file" id="TreeFile" name="TreeFile" >
-				<textarea id="TreeFile_txt" name="TreeFile_txt" rows=8 cols=50></textarea>
 				<br><br></div>
 				
 				<div class="col-md-6 col-lg-6">
 				<font face="serif" size="5" color="#4271bc">Load your chromosome counts file:</font><br>
+				<textarea id="CountsTxt" name="CountsTxt" rows=8 cols=50></textarea>
 				<input type="file" id="CountsFile" name="CountsFile" >
-				<textarea id="CountsFile_txt" name="CountsFile_txt" rows=8 cols=50></textarea>
 				<br><br></div>
 			
 			</div>
 
 
-			
+		&nbsp;&nbsp;<button type="button" onclick="LoadExample()" style="color:purple;font-weight:bold;height:35px;font-size:20px">Load Example</button>
 
 	
     <script> 
@@ -350,7 +378,7 @@ function eraseInputTextCounts() {
     });
     </script> 
 							
-
+<br><br>
 			<div class = "col-md-12 col-lg-12">
 				<div class="col-md-6 col-lg-6">
 				<font face="serif" size="5" color="#4271bc">Counts Vs. Phylogeny:</font><a id="popover1" data-trigger="hover" class="btn btn-default transparentBorder fontSize_23px" rel="popover" data-html="true" data-content="Please replace this text with your info line."><span class="glyphicon glyphicon-info-sign infoIcon"></span></a><br>
@@ -738,4 +766,3 @@ function getFoodItem(){
 </body>
 
 </html>
-
